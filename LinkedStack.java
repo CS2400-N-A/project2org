@@ -53,7 +53,7 @@ public final class LinkedStack<T> implements StackInterface<T>
 
    /** Removes all entries from this stack. */
    public void clear(){
-      
+      topNode=null;      
    }
 
 	private class Node
