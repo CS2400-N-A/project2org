@@ -16,14 +16,8 @@ public final class LinkedStack<T> implements StackInterface<T>
    /** Adds a new entry to the top of this stack.
        @param newEntry  An object to be added to the stack. */
    public void push(T newEntry){
-      if(isEmpty()){
-         topNode = new Node(newEntry);
-      }
-      else{
-         Node nextNode = new Node(newEntry);
-         topNode.setNextNode(nextNode);
-         topNode=topNode.getNextNode();
-      }
+      Node newNode = new Node (newEntry, topNode);
+      topNode = newNode;
    }
 
    /** Removes and returns this stack's top entry.
