@@ -24,11 +24,8 @@ public final class LinkedStack<T> implements StackInterface<T>
        @return  The object at the top of the stack. 
        @throws  EmptyStackException if the stack is empty before the operation. */
    public T pop(){
-      if(isEmpty()){
-         throw new EmptyStackException();
-      }
-      T result = topNode.getData();
-      
+      T result = peek();
+      topNode = topNode.getNextNode();
       return result;
    }
 
