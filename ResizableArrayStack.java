@@ -1,3 +1,5 @@
+import java.util.EmptyStackException;
+
 /**
     A class of stacks whose entries are stored in an array.
     @author Frank M. Carrano and Timothy M. Henry
@@ -30,24 +32,48 @@ public final class ResizableArrayStack<T> implements StackInterface<T>
   } // end constructor
   
   public void push(T newEntry) {
-     
+     checkIntegrity();
+     ensureCapacity();
+     stack[topIndex +1] = newEntry;
+     topIndex++;
   }
 
   public T pop() {
-     return null;
-  }
+     checkIntegrity();
+     if (isEmpty())
+     throw new EmptyStackException();
+     else {
+      T top = stack[topIndex];
+      stack[topIndex] = null;      
+      topIndex--;
+      return top;
+     } //end if
+  } //end pop
 
   public T peek() {
-     return null;
+     checkIntegrity();
+     if (isEmpty())
+      throw new EmptyStackException();
+      else 
+      return stack[topIndex];
   }
 
   public boolean isEmpty() {
-     return false;
+     return topIndex < 0;
   }
 
   public void clear() {
+     checkIntegrity();
      
-  }
+     // Remove references to the objects in the stack,
+     // but do not deallocate the array
+     while (topIndex > -1) {
+     stack[topIndex] = null;
+     topIndex--;
+     } //end while
+     //Assertion: topIndex is -1
+  } //end clear
+  
 //  < Implementations of the private methods go here; checkCapacity and checkIntegrity
 //    are analogous to those in Chapter 2. >
 //  . . .
