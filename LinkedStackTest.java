@@ -4,6 +4,10 @@ public class LinkedStackTest {
         System.out.println((convertToPostFix(infixExpression)));
     }
 
+    /** Converts an infix expression into a postfix expression
+        @param infix The infix expression
+        @return Postfix implementation of the infix expression
+     */
     private static String convertToPostFix(String infix){
     	if(infix.equals(null)) {
     		return null;

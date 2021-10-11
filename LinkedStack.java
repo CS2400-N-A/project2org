@@ -49,7 +49,7 @@ public final class LinkedStack<T> implements StackInterface<T>
    public void clear(){
       topNode=null;      
    }
-
+   
 	private class Node
 	{
       private T    data; // Entry in stack
