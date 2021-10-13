@@ -88,4 +88,6 @@ public final class ResizableArrayStack<T> implements StackInterface<T>
   private void doubleCapacity(){
      
   }
+
 } // end ResizableArrayStack
+
