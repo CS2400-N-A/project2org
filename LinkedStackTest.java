@@ -1,14 +1,14 @@
 public class LinkedStackTest {
     public static void main(String[] args) {
         String infixExpression = "a*b/(c-a)+d*e";
-        System.out.println((convertToPostFix(infixExpression)));
+        System.out.println((convertToPostfix(infixExpression)));
     }
 
     /** Converts an infix expression into a postfix expression
         @param infix The infix expression
         @return Postfix implementation of the infix expression
      */
-    private static String convertToPostFix(String infix){
+    public static String convertToPostfix(String infix){
     	if(infix.equals(null)) {
     		return null;
     	}
@@ -55,6 +55,11 @@ public class LinkedStackTest {
     	return ans;
     }
     
+	/**
+	 * Returns the esatblished priority of the operators +, -, *, /
+	   @param	operator Operator to receive priority of
+	   @return	0 if * or / and 1 if + or -s
+	 */
     private static int operatorPriority(char operator) {
     	if(operator == '*' || operator == '/')
     		return 0;
