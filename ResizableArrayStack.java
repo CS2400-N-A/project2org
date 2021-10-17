@@ -78,16 +78,20 @@ public final class ResizableArrayStack<T> implements StackInterface<T>
 //    are analogous to those in Chapter 2. >
 //  . . .
   private void checkCapacity(int a){
-
-  }
+   if (capacity > MAX_CAPACITY)
+         throw new IllegalStateException("Attempt to create a bag whose capacity exceeds " +
+                                         "allowed maximum of " + MAX_CAPACITY);
+   } // end checkCapacity
 
   private boolean checkIntegrity(){
      return false;
   }
 
   private void doubleCapacity(){
-     
-  }
+   int newLength = 2 * bag.length;
+   checkCapacity(newLength);
+   bag = Arrays.copyOf(bag, newLength);
+} // end doubleCapacity
 
 } // end ResizableArrayStack
 
