@@ -1,4 +1,5 @@
 import java.util.EmptyStackException;
+import java.util.Arrays;
 
 /**
     A class of stacks whose entries are stored in an array.
@@ -33,7 +34,7 @@ public final class ResizableArrayStack<T> implements StackInterface<T>
   
   public void push(T newEntry) {
      checkIntegrity();
-     ensureCapacity();
+     checkCapacity(stack.length);
      stack[topIndex +1] = newEntry;
      topIndex++;
   }
@@ -59,7 +60,8 @@ public final class ResizableArrayStack<T> implements StackInterface<T>
   }
 
   public boolean isEmpty() {
-     return topIndex < 0;
+     integrityOK = topIndex < 0;
+     return integrityOK;
   }
 
   public void clear() {
@@ -77,20 +79,20 @@ public final class ResizableArrayStack<T> implements StackInterface<T>
 //  < Implementations of the private methods go here; checkCapacity and checkIntegrity
 //    are analogous to those in Chapter 2. >
 //  . . .
-  private void checkCapacity(int a){
+  private void checkCapacity(int capacity){
    if (capacity > MAX_CAPACITY)
          throw new IllegalStateException("Attempt to create a bag whose capacity exceeds " +
                                          "allowed maximum of " + MAX_CAPACITY);
    } // end checkCapacity
 
   private boolean checkIntegrity(){
-     return false;
+     return integrityOK;
   }
 
   private void doubleCapacity(){
-   int newLength = 2 * bag.length;
+   int newLength = 2 * stack.length;
    checkCapacity(newLength);
-   bag = Arrays.copyOf(bag, newLength);
+   stack = Arrays.copyOf(stack, newLength);
 } // end doubleCapacity
 
 } // end ResizableArrayStack
