@@ -1,3 +1,6 @@
+import java.util.EmptyStackException;
+import java.util.Arrays;
+
 /**
     A class of stacks whose entries are stored in an array.
     @author Frank M. Carrano and Timothy M. Henry
@@ -29,37 +32,86 @@ public final class ResizableArrayStack<T> implements StackInterface<T>
       integrityOK = true;
   } // end constructor
   
-  public void push(T newEntry) {
-     
-  }
+   /** Adds a new entry to the top of this stack.
+      @param newEntry  An object to be added to the stack. */
+   public void push(T newEntry) {
+      checkIntegrity();
+      ensureCapacity();
+      stack[topIndex +1] = newEntry;
+      topIndex++;
+  }// end push
 
+   /** Removes and returns this stack's top entry.
+      @return  The object at the top of the stack. 
+      @throws  EmptyStackException if the stack is empty before the operation. */
   public T pop() {
-     return null;
-  }
+      checkIntegrity();
+      if (isEmpty())
+      throw new EmptyStackException();
+      else {
+         T top = stack[topIndex];
+         stack[topIndex] = null;      
+         topIndex--;
+         return top;
+      } //end if
+  } //end pop
 
-  public T peek() {
-     return null;
-  }
+   private void ensureCapacity(){
+      if (topIndex >= stack.length - 1) { // If array is full, double its size
+         int newLength = 2 * stack.length;
+         checkCapacity(newLength);
+         stack = Arrays.copyOf(stack, newLength);
+      } // end if 
+   } // end ensureCapacity
 
-  public boolean isEmpty() {
-     return false;
-  }
+   /** Retrieves this stack's top entry.
+      @return  The object at the top of the stack.
+      @throws  EmptyStackException if the stack is empty. */
+   public T peek() {
+      checkIntegrity();
+      if (isEmpty())
+         throw new EmptyStackException();
+      else 
+         return stack[topIndex];
+   }  // end peek
 
-  public void clear() {
+   /** Detects whether this stack is empty.
+      @return  True if the stack is empty. */
+   public boolean isEmpty() {
+      return topIndex < 0;
+   } // end isEmpty
+
+   /** Removes all entries from this stack. */
+   public void clear() {
+      checkIntegrity();
      
-  }
+      // Remove references to the objects in the stack,
+      // but do not deallocate the array
+      while (topIndex > -1) {
+         stack[topIndex] = null;
+         topIndex--;
+      } //end while
+      //Assertion: topIndex is -1
+   } //end clear
+  
 //  < Implementations of the private methods go here; checkCapacity and checkIntegrity
 //    are analogous to those in Chapter 2. >
 //  . . .
-  private void checkCapacity(int a){
+   private void checkCapacity(int capacity){
+      if (capacity > MAX_CAPACITY)
+         throw new IllegalStateException("Attempt to create a bag whose capacity exceeds " +
+                                         "allowed maximum of " + MAX_CAPACITY);
+   } // end checkCapacity
 
-  }
+  /*private boolean checkIntegrity(){
+     return integrityOK;
+  }*/
 
-  private boolean checkIntegrity(){
-     return false;
-  }
+  private void checkIntegrity()
+   {
+      if (!integrityOK)
+         throw new SecurityException ("ArrayStack object is corrupt.");
+   } // end checkintegrity
 
-  private void doubleCapacity(){
-     
-  }
 } // end ResizableArrayStack
+
