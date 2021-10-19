@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"<Unnamed>","l":"JUnitStackTest"},{"p":"<Unnamed>","l":"LinkedStack"},{"p":"<Unnamed>","l":"LinkedStackTest"},{"p":"<Unnamed>","l":"LinkedStack.Node"},{"p":"<Unnamed>","l":"ResizableArrayStack"},{"p":"<Unnamed>","l":"ResizableArrayStackTest"},{"p":"<Unnamed>","l":"StackInterface"}];updateSearchResults();
