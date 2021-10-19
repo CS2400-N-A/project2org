@@ -4,12 +4,13 @@ public class JUnitStackTest {
 	
 	@Test
 	public void convertToPostfixTest(){
-		String testOne = "(a+b)+(c*d)";
-		assertEquals("ab+cd*+", LinkedStackTest.convertToPostfix(testOne));
+		String testOne = "a * b / (c - a) + d * e";
+		assertEquals("ab*ca-/de*+", LinkedStackTest.convertToPostfix(testOne));
 	}
 
 	@Test
-	public void convertToPostfixTest2(){
-		assertEquals("ab/c*deh^+-", LinkedStackTest.convertToPostfix("(a/b*c)-(d+(e^h))"));
+	public void evaluatePostfixTest(){
+		String test = "ab*ca-/de*+";
+		assertEquals("33", ResizableArrayStackTest.evaluatePostfix(test));
 	}
 }
